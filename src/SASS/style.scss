@@ -1,0 +1,17 @@
+@import "./LogReg";
+@import "./TopLeftBars";
+@import "./Users";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: $darkerGreyColor;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

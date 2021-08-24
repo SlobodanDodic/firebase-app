@@ -1,0 +1,23 @@
+/* mixins */
+
+@mixin hover-effect {
+  &:hover {
+    cursor: pointer;
+    color: lighten($blueColor, 27%);
+  }
+}
+
+/* variables */
+
+// colors:
+
+$blueColor: #545cad;
+$darkBlueColor: #2c337c;
+$whiteColor: #ffffff;
+$greyColor: #8c8ca0;
+$lightGreyColor: #fbfbfb;
+$darkerGreyColor: #f4f4f6;
+
+// font:
+
+$fontSmall: 12px;

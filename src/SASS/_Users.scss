@@ -1,0 +1,72 @@
+@import "./MixVar";
+
+// Users Page
+
+.users,
+.fetch-users,
+.add-edit,
+.profile,
+.skills {
+  margin-top: 65px;
+  text-align: -webkit-center;
+  .btn-primary {
+    background-color: $blueColor;
+  }
+}
+
+// Single User Page
+
+.users {
+  .card {
+    max-width: 500px;
+    border: 0px !important;
+    border-top: 2px solid !important;
+    border-image: linear-gradient(
+      to left,
+      $whiteColor,
+      $darkBlueColor
+    ) !important;
+    border-image-slice: 1 !important;
+    .email {
+      font-size: $fontSmall;
+      letter-spacing: 1px;
+      text-decoration: underline;
+    }
+  }
+
+  .card-body {
+    padding-bottom: 0px !important;
+  }
+}
+
+// add-edit page
+
+.add-edit {
+  label {
+    padding: 7px;
+    margin: 0;
+    font-size: 0.875rem;
+    border: none;
+    text-align: left;
+    background-color: $darkerGreyColor;
+    color: #6c757e;
+  }
+  #inputGroupFile02 {
+    height: auto;
+    border: 1px solid lightgrey;
+    margin-bottom: 17px;
+    border-radius: 4px;
+  }
+  .custom-file {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    height: auto;
+    margin-bottom: 15px;
+    background-color: $darkerGreyColor;
+  }
+  .custom-file:hover,
+  label:hover,
+  #inputGroupFile02:hover {
+    cursor: pointer;
+  }
+}
