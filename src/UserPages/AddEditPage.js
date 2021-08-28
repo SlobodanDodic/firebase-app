@@ -20,8 +20,6 @@ const AddEditPage = () => {
   let currentId = useParams();
   const { id } = currentId;
 
-  console.log(id);
-
   useEffect(() => {
     if (id) {
       app
@@ -76,8 +74,8 @@ const AddEditPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (id) {
+    if (!id) {
+      //create
       const body = {
         firstName,
         lastName,
@@ -100,8 +98,8 @@ const AddEditPage = () => {
           }
         });
     } else {
+      // update
       const body = {
-        id,
         firstName,
         lastName,
         email,
@@ -116,24 +114,12 @@ const AddEditPage = () => {
       app
         .database()
         .ref()
-        .child("usersDB")
-        .child(id)
-        .get()
-        .then((body) => {
-          if (body.exists()) {
-            console.log(body.val());
-          } else {
-            console.log("No data available");
+        .child(`/usersDB/${id}`)
+        .set(body, (err) => {
+          if (err) {
+            console.log(err);
           }
-        })
-        .catch((error) => {
-          console.error(error);
         });
-      // .set(body, (err) => {
-      //   if (err) {
-      //     console.log(err);
-      //   }
-      // });
     }
 
     history.push("/");
