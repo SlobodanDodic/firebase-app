@@ -2,85 +2,138 @@ import React, { useEffect, useState } from "react";
 import TopbarPage from "../Components/TopbarPage";
 import app from "../firebase";
 import { useHistory, useParams, Link } from "react-router-dom";
-import { isEmpty } from "lodash";
 
 const AddEditPage = () => {
-  const values = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-    age: "",
-    address: "",
-    city: "",
-    phone: "",
-    skills: "",
-    avatar: "",
-  };
-
-  const [initialState, setState] = useState(values);
-  const {
-    first_name,
-    last_name,
-    email,
-    password,
-    age,
-    address,
-    city,
-    phone,
-    skills,
-    avatar,
-  } = initialState;
-
-  const [data, setData] = useState({});
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [phone, setPhone] = useState("");
+  const [skills, setSkills] = useState("");
+  const [avatar, setAvatar] = useState(null);
 
   const history = useHistory();
 
   let currentId = useParams();
   const { id } = currentId;
 
+  console.log(id);
+
   useEffect(() => {
-    app.child("usersDB").on("value", (snapshot) => {
-      if (snapshot.val() !== null) {
-        setData({
-          ...snapshot.val(),
+    if (id) {
+      app
+        .database()
+        .ref()
+        .child("usersDB")
+        .child(id)
+        .on("value", (snapshot) => {
+          if (snapshot.val() !== null) {
+            const user = snapshot.val();
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+            setEmail(user.email);
+            setPassword(user.password);
+            setAge(user.age);
+            setAddress(user.address);
+            setCity(user.city);
+            setPhone(user.phone);
+            setSkills(user.skills);
+            setAvatar(user.avatar);
+          }
         });
-      } else {
-        snapshot({});
-      }
-    });
+    }
   }, [id]);
 
-  useEffect(() => {
-    if (isEmpty(id)) {
-      setState({ ...values });
-    } else {
-      setState({ ...data[id] });
-    }
-  }, [id, data]);
+  // useEffect(() => {
+  //   if (isEmpty(id)) {
+  //     setState({ ...values });
+  //   } else {
+  //     setState({ ...data[id] });
+  //   }
+  // }, [id, data]);
 
-  const handleInputChange = (e) => {
-    let { name, value } = e.target;
-    setState({
-      ...initialState,
-      [name]: value,
-    });
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    app
+      .storage()
+      .ref(`images/${file.name}`)
+      .put(file)
+      .then(() => {
+        app
+          .storage()
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            setAvatar(url);
+          });
+      });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isEmpty(id)) {
-      app.child("usersDB").push(initialState, (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+
+    if (id) {
+      const body = {
+        firstName,
+        lastName,
+        email,
+        password,
+        age,
+        address,
+        city,
+        phone,
+        skills,
+        avatar,
+      };
+      app
+        .database()
+        .ref()
+        .child("usersDB")
+        .push(body, (err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
     } else {
-      app.child(`/usersDB/${id}`).set(initialState, (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+      const body = {
+        id,
+        firstName,
+        lastName,
+        email,
+        password,
+        age,
+        address,
+        city,
+        phone,
+        skills,
+        avatar,
+      };
+      app
+        .database()
+        .ref()
+        .child("usersDB")
+        .child(id)
+        .get()
+        .then((body) => {
+          if (body.exists()) {
+            console.log(body.val());
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      // .set(body, (err) => {
+      //   if (err) {
+      //     console.log(err);
+      //   }
+      // });
     }
 
     history.push("/");
@@ -97,9 +150,9 @@ const AddEditPage = () => {
                 type="text"
                 className="form-control"
                 placeholder="First Name"
-                defaultValue={first_name}
-                name="first_name"
-                onChange={handleInputChange}
+                defaultValue={firstName}
+                name="firstName"
+                onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
 
@@ -108,9 +161,9 @@ const AddEditPage = () => {
                 type="text"
                 className="form-control"
                 placeholder="Last Name"
-                name="last_name"
-                defaultValue={last_name}
-                onChange={handleInputChange}
+                name="lastName"
+                defaultValue={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
 
@@ -121,7 +174,7 @@ const AddEditPage = () => {
                 placeholder="Email"
                 name="email"
                 defaultValue={email}
-                onChange={handleInputChange}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -132,7 +185,7 @@ const AddEditPage = () => {
                 placeholder="Password"
                 name="password"
                 defaultValue={password}
-                onChange={handleInputChange}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -143,7 +196,7 @@ const AddEditPage = () => {
                 placeholder="Age"
                 name="age"
                 defaultValue={age}
-                onChange={handleInputChange}
+                onChange={(e) => setAge(e.target.value)}
               />
             </div>
 
@@ -154,7 +207,7 @@ const AddEditPage = () => {
                 placeholder="Address"
                 name="address"
                 defaultValue={address}
-                onChange={handleInputChange}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
 
@@ -165,7 +218,7 @@ const AddEditPage = () => {
                 placeholder="City"
                 name="city"
                 defaultValue={city}
-                onChange={handleInputChange}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
 
@@ -176,7 +229,7 @@ const AddEditPage = () => {
                 placeholder="Phone"
                 name="phone"
                 defaultValue={phone}
-                onChange={handleInputChange}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
 
@@ -187,7 +240,7 @@ const AddEditPage = () => {
                 placeholder="Skills"
                 name="skills"
                 defaultValue={skills}
-                onChange={handleInputChange}
+                onChange={(e) => setSkills(e.target.value)}
               />
             </div>
 
@@ -202,7 +255,13 @@ const AddEditPage = () => {
                   id="inputGroupFile02"
                   name="avatar"
                   defaultValue={avatar}
-                  onChange={handleInputChange}
+                  onChange={handleUpload}
+                />
+                <img
+                  src={avatar || "https://via.placeholder.com/100x100"}
+                  alt="Uploaded Images"
+                  height="100"
+                  width="100"
                 />
               </div>
             </div>

@@ -7,24 +7,32 @@ const UsersPage = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    app.child("usersDB").on("value", (snapshot) => {
-      if (snapshot.val() !== null) {
-        setData({
-          ...snapshot.val(),
-        });
-      } else {
-        snapshot({});
-      }
-    });
+    app
+      .database()
+      .ref()
+      .child("usersDB")
+      .on("value", (snapshot) => {
+        if (snapshot.val() !== null) {
+          setData({
+            ...snapshot.val(),
+          });
+        } else {
+          snapshot({});
+        }
+      });
   }, []);
 
   const handleDelete = (id) => {
     if (window.confirm("You will delete this user. Are you sure?")) {
-      app.child(`usersDB/${id}`).remove((err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+      app
+        .database()
+        .ref()
+        .child(`usersDB/${id}`)
+        .remove((err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
     }
   };
 
@@ -50,7 +58,7 @@ const UsersPage = () => {
               <div className="col-md-8">
                 <div className="card-body">
                   <h6 className="card-title">
-                    {data[id].first_name} {data[id].last_name}
+                    {data[id].firstName} {data[id].lastName}
                   </h6>
                   <p className="card-text email">{data[id].email}</p>
                   <p className="card-text phone">{data[id].phone}</p>

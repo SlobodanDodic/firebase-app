@@ -11,15 +11,19 @@ const ProfilePage = () => {
   const { id } = currentId;
 
   useEffect(() => {
-    app.child("usersDB").on("value", (snapshot) => {
-      if (snapshot.val() !== null) {
-        setData({
-          ...snapshot.val(),
-        });
-      } else {
-        snapshot({});
-      }
-    });
+    app
+      .database()
+      .ref()
+      .child("usersDB")
+      .on("value", (snapshot) => {
+        if (snapshot.val() !== null) {
+          setData({
+            ...snapshot.val(),
+          });
+        } else {
+          snapshot({});
+        }
+      });
   }, [id]);
 
   return (
@@ -39,7 +43,11 @@ const ProfilePage = () => {
                   boxShadow: "0px 0px 40px 10px lightgrey",
                 }}
               >
-                <img className="card-img-top" src={avatarV} alt="Card cap" />
+                <img
+                  className="card-img-top"
+                  src={data[id].avatar ? data[id].avatar : avatarV}
+                  alt="Card cap"
+                />
                 <div
                   className="card-body"
                   style={{
