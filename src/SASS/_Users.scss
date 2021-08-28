@@ -14,7 +14,16 @@
   }
 }
 
-// Single User Page
+.users {
+  .rounded-circle {
+    height: 105px;
+    width: 105px;
+    object-fit: cover;
+    box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+  }
+}
+
+// Users Page
 
 .users {
   .card {
@@ -39,7 +48,7 @@
   }
 }
 
-// add-edit page
+// Add-edit page
 
 .add-edit {
   label {
@@ -60,13 +69,33 @@
   .custom-file {
     border: 1px solid lightgray;
     border-radius: 5px;
-    height: auto;
+    height: 365px;
     margin-bottom: 15px;
     background-color: $darkerGreyColor;
+  }
+  .custom-file-input {
+    top: -35px;
+    margin: 0;
+  }
+  .uploadImg {
+    width: inherit;
+    height: 305px;
+    top: -30px;
+    position: relative;
+    object-fit: cover;
   }
   .custom-file:hover,
   label:hover,
   #inputGroupFile02:hover {
     cursor: pointer;
+  }
+}
+
+// Profile page
+
+.profile {
+  .card-img-top {
+    object-fit: cover;
+    height: 265px;
   }
 }

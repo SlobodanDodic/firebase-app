@@ -3,6 +3,8 @@ import app from "../firebase";
 
 const auth = app.auth();
 
+console.log(auth);
+
 const AuthContext = React.createContext();
 
 export function useAuth() {
@@ -38,6 +40,17 @@ export function AuthProvider({ children }) {
     });
     return () => unsubscribe;
   }, []);
+
+  if (loading) {
+    return (
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ minHeight: "100vh", fontSize: "40px" }}
+      >
+        Loading...
+      </div>
+    );
+  }
 
   const value = {
     currentUser,

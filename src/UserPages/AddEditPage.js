@@ -45,14 +45,6 @@ const AddEditPage = () => {
     }
   }, [id]);
 
-  // useEffect(() => {
-  //   if (isEmpty(id)) {
-  //     setState({ ...values });
-  //   } else {
-  //     setState({ ...data[id] });
-  //   }
-  // }, [id, data]);
-
   const handleUpload = (e) => {
     const file = e.target.files[0];
     app
@@ -72,22 +64,23 @@ const AddEditPage = () => {
       });
   };
 
+  const body = {
+    firstName,
+    lastName,
+    email,
+    password,
+    age,
+    address,
+    city,
+    phone,
+    skills,
+    avatar,
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!id) {
-      //create
-      const body = {
-        firstName,
-        lastName,
-        email,
-        password,
-        age,
-        address,
-        city,
-        phone,
-        skills,
-        avatar,
-      };
+      // Create user
       app
         .database()
         .ref()
@@ -98,19 +91,7 @@ const AddEditPage = () => {
           }
         });
     } else {
-      // update
-      const body = {
-        firstName,
-        lastName,
-        email,
-        password,
-        age,
-        address,
-        city,
-        phone,
-        skills,
-        avatar,
-      };
+      // Update user
       app
         .database()
         .ref()
@@ -233,7 +214,7 @@ const AddEditPage = () => {
             <div className="input-group-sm">
               <div className="custom-file">
                 <label className="form-control" htmlFor="inputGroupFile02">
-                  Choose image for your avatar
+                  Click to choose image for your avatar
                 </label>
                 <input
                   type="file"
@@ -248,6 +229,7 @@ const AddEditPage = () => {
                   alt="Uploaded Images"
                   height="100"
                   width="100"
+                  className="uploadImg"
                 />
               </div>
             </div>

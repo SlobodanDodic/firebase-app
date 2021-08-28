@@ -49,7 +49,6 @@ const UsersPage = () => {
               <div className="col-md-4">
                 <img
                   src={data[id].avatar ? data[id].avatar : avatarImg}
-                  style={{ height: "105px" }}
                   alt="avatar"
                   className="rounded-circle"
                 />

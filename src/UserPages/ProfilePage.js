@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import avatarV from "../Assets/avatarV.png";
 
 const ProfilePage = () => {
-  const [data, setData] = useState({});
+  const [profile, setProfile] = useState({});
 
   let currentId = useParams();
   const { id } = currentId;
@@ -17,7 +17,7 @@ const ProfilePage = () => {
       .child("usersDB")
       .on("value", (snapshot) => {
         if (snapshot.val() !== null) {
-          setData({
+          setProfile({
             ...snapshot.val(),
           });
         } else {
@@ -32,7 +32,7 @@ const ProfilePage = () => {
 
       <div className="profile col-sm-6 mx-auto">
         <h2 className="mb-4">Profile Page</h2>
-        {Object.keys(data).map((userId) => {
+        {Object.keys(profile).map((userId) => {
           if (userId === id) {
             return (
               <div
@@ -45,7 +45,7 @@ const ProfilePage = () => {
               >
                 <img
                   className="card-img-top"
-                  src={data[id].avatar ? data[id].avatar : avatarV}
+                  src={profile[id].avatar ? profile[id].avatar : avatarV}
                   alt="Card cap"
                 />
                 <div
@@ -58,14 +58,14 @@ const ProfilePage = () => {
                 >
                   <h5 className="card-title">
                     <strong>
-                      {data[id].first_name} {data[id].last_name}
+                      {profile[id].firstName} {profile[id].lastName}
                     </strong>
                   </h5>
                   <p
                     className="card-text"
                     style={{ fontFamily: "monospace", color: "blue" }}
                   >
-                    {data[id].email}
+                    {profile[id].email}
                   </p>
                 </div>
 
@@ -73,42 +73,42 @@ const ProfilePage = () => {
 
                 <div className="card-body">
                   <small className="text-muted">Address: </small>
-                  {data[id].address}
+                  {profile[id].address}
                 </div>
 
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
                   <small className="text-muted">City: </small>
-                  {data[id].city}
+                  {profile[id].city}
                 </div>
 
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
                   <small className="text-muted">Phone number: </small>
-                  {data[id].phone}
+                  {profile[id].phone}
                 </div>
 
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
                   <small className="text-muted">Age: </small>
-                  {data[id].age}
+                  {profile[id].age}
                 </div>
 
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
                   <small className="text-muted">Password: </small>
-                  {data[id].password}
+                  {profile[id].password}
                 </div>
 
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
                   <small className="text-muted">Skills: </small>
-                  {data[id].skills}
+                  {profile[id].skills}
                 </div>
 
                 <hr style={{ margin: "0" }} />
