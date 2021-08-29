@@ -1,7 +1,5 @@
 @import "./MixVar";
 
-// Users Page
-
 .users,
 .fetch-users,
 .add-edit,
@@ -97,5 +95,15 @@
   .card-img-top {
     object-fit: cover;
     height: 265px;
+  }
+}
+
+// Skills page
+
+.skills {
+  .card {
+    width: 70vw;
+    font-size: 0.875rem;
+    padding: 5px;
   }
 }

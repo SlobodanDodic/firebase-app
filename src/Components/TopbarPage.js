@@ -5,7 +5,8 @@ import { useAuth } from "../Contexts/AuthContext";
 import { Alert } from "react-bootstrap";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import logo from "../Assets/logo.png";
-import id from "../Assets/avatarV.jpg";
+import avatarV from "../Assets/avatarV.png";
+import avatar from "../Assets/avatar.png";
 
 function TopbarPage() {
   const [leftbar, setLeftbar] = useState(false);
@@ -51,7 +52,11 @@ function TopbarPage() {
 
         {/* User info */}
         <span className="topbar-loggedUser">
-          <img src={id} className="top-user-img" alt="id" />
+          <img
+            src={avatar ? avatar : avatarV}
+            className="top-user-img"
+            alt="id"
+          />
 
           <div className="dropdown">
             <button
@@ -101,7 +106,11 @@ function TopbarPage() {
           <div className="leftbar-loggedUser">
             <h5>{userName}</h5>
             <p>{currentUser.email}</p>
-            <img src={id} className="user-img" alt="id" />
+            <img
+              src={avatar ? avatar : avatarV}
+              className="user-img"
+              alt="id"
+            />
           </div>
 
           {LeftbarData.map((item, index) => {
