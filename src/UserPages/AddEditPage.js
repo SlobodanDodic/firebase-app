@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TopbarPage from "../Components/TopbarPage";
-import app from "../firebase";
+import { db } from "../firebase";
 import { useHistory, useParams, Link } from "react-router-dom";
 
 const AddEditPage = () => {
@@ -22,8 +22,7 @@ const AddEditPage = () => {
 
   useEffect(() => {
     if (id) {
-      app
-        .database()
+      db.database()
         .ref()
         .child("usersDB")
         .child(id)
@@ -47,13 +46,11 @@ const AddEditPage = () => {
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
-    app
-      .storage()
+    db.storage()
       .ref(`images/${file.name}`)
       .put(file)
       .then(() => {
-        app
-          .storage()
+        db.storage()
           .ref("images")
           .child(file.name)
           .getDownloadURL()
@@ -81,8 +78,7 @@ const AddEditPage = () => {
     e.preventDefault();
     if (!id) {
       // Create user
-      app
-        .database()
+      db.database()
         .ref()
         .child("usersDB")
         .push(body, (err) => {
@@ -92,8 +88,7 @@ const AddEditPage = () => {
         });
     } else {
       // Update user
-      app
-        .database()
+      db.database()
         .ref()
         .child(`/usersDB/${id}`)
         .set(body, (err) => {
@@ -105,6 +100,30 @@ const AddEditPage = () => {
 
     history.push("/");
   };
+
+  useEffect(() => {
+    if (id) {
+      db.database()
+        .ref()
+        .child("usersDB")
+        .child(id)
+        .on("value", (snapshot) => {
+          if (snapshot.val() !== null) {
+            const user = snapshot.val();
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+            setEmail(user.email);
+            setPassword(user.password);
+            setAge(user.age);
+            setAddress(user.address);
+            setCity(user.city);
+            setPhone(user.phone);
+            setSkills(user.skills);
+            setAvatar(user.avatar);
+          }
+        });
+    }
+  }, [id]);
 
   return (
     <>

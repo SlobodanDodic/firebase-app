@@ -1,5 +1,5 @@
 import React from "react";
-import { BsPeopleFill, BsServer } from "react-icons/bs";
+import { BsPeopleFill, BsServer, BsBraces } from "react-icons/bs";
 
 export const LeftbarData = [
   {
@@ -12,6 +12,12 @@ export const LeftbarData = [
     title: "Fetch Users",
     path: "/fetch-users",
     icon: <BsServer />,
+    classes: "links",
+  },
+  {
+    title: "Skills",
+    path: "/skills",
+    icon: <BsBraces />,
     classes: "links",
   },
 ];

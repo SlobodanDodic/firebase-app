@@ -10,6 +10,7 @@ import "./style.css";
 import FetchUsers from "./UserPages/FetchUsers";
 import AddEditPage from "./UserPages/AddEditPage";
 import ProfilePage from "./UserPages/ProfilePage";
+import SkillsPage from "./UserPages/SkillsPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/fetch-users" component={FetchUsers} />
+            <Route path="/skills" component={SkillsPage} />
 
             <Route path="/add-edit" component={AddEditPage} />
             <Route path="/update/:id" component={AddEditPage} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TopbarPage from "../Components/TopbarPage";
-import app from "../firebase";
+import { db } from "../firebase";
 import { Link, useParams } from "react-router-dom";
 import avatarV from "../Assets/avatarV.png";
 
@@ -11,8 +11,7 @@ const ProfilePage = () => {
   const { id } = currentId;
 
   useEffect(() => {
-    app
-      .database()
+    db.database()
       .ref()
       .child("usersDB")
       .on("value", (snapshot) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import app from "../firebase";
+import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import avatarImg from "../Assets/avatar.png";
 
@@ -7,8 +7,7 @@ const UsersPage = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    app
-      .database()
+    db.database()
       .ref()
       .child("usersDB")
       .on("value", (snapshot) => {
@@ -24,8 +23,7 @@ const UsersPage = () => {
 
   const handleDelete = (id) => {
     if (window.confirm("You will delete this user. Are you sure?")) {
-      app
-        .database()
+      db.database()
         .ref()
         .child(`usersDB/${id}`)
         .remove((err) => {
