@@ -23,9 +23,9 @@ export default function SkillsPage() {
         <hr />
 
         {skills.map((skill) => (
-          <div key={skill.id} classnames="card">
-            <div classnames="card-body">
-              <h2>{skill.title}</h2>
+          <div key={skill.id} className="card">
+            <div className="card-body">
+              <h3>{skill.title}</h3>
               <div>{skill.content}</div>
             </div>
           </div>
