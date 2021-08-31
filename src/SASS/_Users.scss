@@ -114,4 +114,13 @@
 
 .update-profile {
   max-width: 300px;
+  .card-body {
+    padding: 1rem 0px;
+  }
+  .form-label {
+    font-size: 0.85rem;
+  }
+  .form-control {
+    font-size: 0.85rem;
+  }
 }

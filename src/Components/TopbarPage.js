@@ -66,7 +66,7 @@ function TopbarPage() {
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-              style={{ color: "white" }}
+              style={{ color: "white", fontSize: "12px" }}
             >
               {currentUser.displayName}
             </button>
@@ -89,9 +89,6 @@ function TopbarPage() {
                   Update Profile
                 </Link>
               </button>
-              {/* <button className="dropdown-item" type="button">
-                Another
-              </button> */}
             </div>
           </div>
 
@@ -109,7 +106,7 @@ function TopbarPage() {
 
           {/* User info */}
           <div className="leftbar-loggedUser">
-            <h5>{currentUser.displayName}</h5>
+            <h6>{currentUser.displayName}</h6>
             <p>{currentUser.email}</p>
             <img
               src={avatar ? avatar : avatarV}
