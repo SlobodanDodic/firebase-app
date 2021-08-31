@@ -11,6 +11,7 @@ import FetchUsers from "./UserPages/FetchUsers";
 import AddEditPage from "./UserPages/AddEditPage";
 import ProfilePage from "./UserPages/ProfilePage";
 import SkillsPage from "./UserPages/SkillsPage";
+import UpdateProfile from "./Components/UpdateProfile";
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
         <AuthProvider>
           <Switch>
             <PrivateRoute exact path="/" component={Dashboard} />
+            <PrivateRoute
+              exact
+              path="/update-profile"
+              component={UpdateProfile}
+            />
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />

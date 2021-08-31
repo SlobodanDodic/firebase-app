@@ -4,7 +4,8 @@
 .fetch-users,
 .add-edit,
 .profile,
-.skills {
+.skills,
+.update-profile {
   margin-top: 65px;
   text-align: -webkit-center;
   .btn-primary {
@@ -107,4 +108,10 @@
     padding: 5px;
     margin-bottom: 20px;
   }
+}
+
+// Update ProfilePage
+
+.update-profile {
+  max-width: 300px;
 }

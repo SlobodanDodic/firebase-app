@@ -257,7 +257,7 @@ const AddEditPage = () => {
           <Link
             to={"/"}
             type="button"
-            className="btn btn-sm btn-secondary w-100"
+            className="btn btn-sm btn-secondary w-100 mt-2"
           >
             Cancel
           </Link>

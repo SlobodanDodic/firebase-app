@@ -26,10 +26,10 @@ function TopbarPage() {
     }
   }
 
-  const userMail = currentUser.email;
-  const userNameSmall = userMail.substring(0, userMail.lastIndexOf("@"));
-  const userName =
-    userNameSmall.charAt(0).toUpperCase() + userNameSmall.slice(1);
+  // const userMail = currentUser.email;
+  // const userNameSmall = userMail.substring(0, userMail.lastIndexOf("@"));
+  // const userName =
+  //   userNameSmall.charAt(0).toUpperCase() + userNameSmall.slice(1);
 
   return (
     <div className="fixed-top">
@@ -68,7 +68,7 @@ function TopbarPage() {
               aria-expanded="false"
               style={{ color: "white" }}
             >
-              {userName}
+              {currentUser.displayName}
             </button>
             <div
               className="dropdown-menu text-center "
@@ -82,11 +82,16 @@ function TopbarPage() {
                 Log out
               </button>
               <button className="dropdown-item" type="button">
-                Another
+                <Link
+                  to="/update-profile"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Update Profile
+                </Link>
               </button>
-              <button className="dropdown-item" type="button">
+              {/* <button className="dropdown-item" type="button">
                 Another
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -104,7 +109,7 @@ function TopbarPage() {
 
           {/* User info */}
           <div className="leftbar-loggedUser">
-            <h5>{userName}</h5>
+            <h5>{currentUser.displayName}</h5>
             <p>{currentUser.email}</p>
             <img
               src={avatar ? avatar : avatarV}
