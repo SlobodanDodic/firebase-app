@@ -10,18 +10,13 @@ export default function UpdateProfile() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
 
-  const { currentUser, updatePassword, updateEmail, updateUser } = useAuth();
+  const { currentUser, updatePassword, updateEmail, updateUserName } =
+    useAuth();
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const history = useHistory();
-
-  // const [name, setName] = useState(null)
-  // const [photo, setPhoto] = useState(null)
-
-  ////////////// UpdateUser /////////////////
-
-  //////////////////////////////////////////
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -40,7 +35,7 @@ export default function UpdateProfile() {
       promises.push(updatePassword(passwordRef.current.value));
     }
     if (userNameRef.current.value) {
-      promises.push(updateUser(userNameRef.current.value));
+      promises.push(updateUserName(userNameRef.current.value));
     }
 
     Promise.all(promises)
@@ -75,7 +70,7 @@ export default function UpdateProfile() {
               />
             </Form.Group>
 
-            <Form.Group id="user-name">
+            <Form.Group id="displayName">
               <Form.Label>User Name</Form.Label>
               <Form.Control
                 type="text"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TopbarPage from "../Components/TopbarPage";
 import { db } from "../firebase";
+import "firebase/storage";
 import { useHistory, useParams, Link } from "react-router-dom";
 
 const AddEditPage = () => {

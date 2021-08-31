@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
     return currentUser.updatePassword(password);
   }
 
-  function updateUser(displayName) {
+  function updateUserName(displayName) {
     return currentUser.updateProfile({ displayName });
   }
 
@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
     resetPassword,
     updateEmail,
     updatePassword,
-    updateUser,
+    updateUserName,
   };
 
   return (
