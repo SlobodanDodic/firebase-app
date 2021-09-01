@@ -6,7 +6,6 @@ import { Alert } from "react-bootstrap";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import logo from "../Assets/logo.png";
 import avatarV from "../Assets/avatarV.png";
-import avatar from "../Assets/avatar.png";
 
 function TopbarPage() {
   const [leftbar, setLeftbar] = useState(false);
@@ -53,7 +52,7 @@ function TopbarPage() {
         {/* User info */}
         <span className="topbar-loggedUser">
           <img
-            src={avatar ? avatar : avatarV}
+            src={currentUser.photoURL ? currentUser.photoURL : avatarV}
             className="top-user-img"
             alt="id"
           />
@@ -109,7 +108,7 @@ function TopbarPage() {
             <h6>{currentUser.displayName}</h6>
             <p>{currentUser.email}</p>
             <img
-              src={avatar ? avatar : avatarV}
+              src={currentUser.photoURL ? currentUser.photoURL : avatarV}
               className="user-img"
               alt="id"
             />

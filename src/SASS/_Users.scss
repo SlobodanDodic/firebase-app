@@ -123,4 +123,20 @@
   .form-control {
     font-size: 0.85rem;
   }
+  .loggedAvatarLabel {
+    border: 1px solid lightgray;
+    background-color: #f4f4f6;
+    border-radius: 5px;
+    width: 100%;
+    color: #559f00;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.375rem;
+  }
+  input[type="file"]::file-selector-button {
+    border: 1px solid rgb(175, 175, 175);
+    border-radius: 5px;
+    color: #6c758c;
+    font-size: 0.85rem;
+    text-align: center;
+  }
 }

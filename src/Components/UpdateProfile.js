@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { db } from "../firebase";
 import TopbarPage from "../Components/TopbarPage";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../Contexts/AuthContext";
@@ -9,9 +10,16 @@ export default function UpdateProfile() {
   const userNameRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  // const userPhotoRef = useRef();
+  const [userAvatar, setUserAvatar] = useState(null);
 
-  const { currentUser, updatePassword, updateEmail, updateUserName } =
-    useAuth();
+  const {
+    currentUser,
+    updatePassword,
+    updateEmail,
+    updateUserName,
+    updateUserPhoto,
+  } = useAuth();
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,6 +45,9 @@ export default function UpdateProfile() {
     if (userNameRef.current.value) {
       promises.push(updateUserName(userNameRef.current.value));
     }
+    if (userAvatar) {
+      promises.push(updateUserPhoto(userAvatar));
+    }
 
     Promise.all(promises)
       .then(() => {
@@ -49,6 +60,23 @@ export default function UpdateProfile() {
         setLoading(false);
       });
   }
+
+  const handleUpload = (e) => {
+    const file = e.target.files[0];
+    db.storage()
+      .ref(`images/${file.name}`)
+      .put(file)
+      .then(() => {
+        db.storage()
+          .ref("images")
+          .child(file.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            setUserAvatar(url);
+          });
+      });
+  };
 
   return (
     <>
@@ -76,6 +104,19 @@ export default function UpdateProfile() {
                 type="text"
                 ref={userNameRef}
                 defaultValue={currentUser.displayName}
+              />
+            </Form.Group>
+
+            <Form.Group id="avatar">
+              <Form.Label>Choose Your Avatar</Form.Label>
+              <Form.Control
+                className="loggedAvatarLabel"
+                type="file"
+                // ref={userPhotoRef}
+                // defaultValue={currentUser.photoURL}
+                name="avatar"
+                defaultValue={userAvatar}
+                onChange={handleUpload}
               />
             </Form.Group>
 
