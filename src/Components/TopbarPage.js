@@ -25,11 +25,6 @@ function TopbarPage() {
     }
   }
 
-  // const userMail = currentUser.email;
-  // const userNameSmall = userMail.substring(0, userMail.lastIndexOf("@"));
-  // const userName =
-  //   userNameSmall.charAt(0).toUpperCase() + userNameSmall.slice(1);
-
   return (
     <div className="fixed-top">
       <div className="topbar">

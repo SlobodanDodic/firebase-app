@@ -99,6 +99,7 @@ span {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    object-fit: cover;
   }
   p {
     color: $whiteColor;
@@ -128,5 +129,6 @@ span {
     width: 85px;
     height: 85px;
     border-radius: 50%;
+    object-fit: cover;
   }
 }
