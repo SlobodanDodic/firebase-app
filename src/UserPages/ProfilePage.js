@@ -10,6 +10,8 @@ const ProfilePage = () => {
   let currentId = useParams();
   const { id } = currentId;
 
+  //console.log(profile[id].selected[0].value);
+
   useEffect(() => {
     db.database()
       .ref()
@@ -106,8 +108,15 @@ const ProfilePage = () => {
                 <hr style={{ margin: "0" }} />
 
                 <div className="card-body">
-                  <small className="text-muted">Skills: </small>
-                  {profile[id].skills}
+                  <small className="text-muted">Skills:</small>
+
+                  {profile[id].selected.map((skill, index) => {
+                    return (
+                      <div key={index}>
+                        <div>{skill.value}</div>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <hr style={{ margin: "0" }} />

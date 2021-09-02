@@ -11,12 +11,12 @@ const UsersPage = () => {
       .ref()
       .child("usersDB")
       .on("value", (snapshot) => {
-        if (snapshot.val() !== null) {
+        if (snapshot.exists()) {
           setData({
             ...snapshot.val(),
           });
         } else {
-          snapshot({});
+          snapshot({}); // something`s not right
         }
       });
   }, []);

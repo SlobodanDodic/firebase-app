@@ -110,7 +110,11 @@ export default function UpdateProfile() {
             <Form.Group id="avatar">
               <Form.Label>Choose Your Avatar</Form.Label>
               <Form.Control
-                className="loggedAvatarLabel"
+                className={
+                  !userAvatar
+                    ? "loggedAvatarLabelRed"
+                    : "loggedAvatarLabelGreen"
+                }
                 type="file"
                 // ref={userPhotoRef}
                 // defaultValue={currentUser.photoURL}

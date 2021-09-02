@@ -3,6 +3,25 @@ import TopbarPage from "../Components/TopbarPage";
 import { db } from "../firebase";
 import "firebase/storage";
 import { useHistory, useParams, Link } from "react-router-dom";
+import { MultiSelect } from "react-multi-select-component";
+
+const options = [
+  { label: "Python", value: "Python" },
+  { label: "JavaScript", value: "JavaScript" },
+  { label: "Java", value: "Java" },
+  { label: "C#", value: "C#" },
+  { label: "C", value: "C" },
+  { label: "C++", value: "C++" },
+  { label: "Go", value: "Go" },
+  { label: "R", value: "R" },
+  { label: "Swift", value: "Swift" },
+  { label: "PHP", value: "PHP" },
+  { label: "Dart", value: "Dart" },
+  { label: "Perl", value: "Perl" },
+  { label: "Ruby", value: "Ruby" },
+  { label: "Rust", value: "Rust" },
+  { label: "MATLAB", value: "MATLAB" },
+];
 
 const AddEditPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,8 +32,9 @@ const AddEditPage = () => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
-  const [skills, setSkills] = useState("");
   const [avatar, setAvatar] = useState(null);
+
+  const [selected, setSelected] = useState([]);
 
   const history = useHistory();
 
@@ -38,7 +58,7 @@ const AddEditPage = () => {
             setAddress(user.address);
             setCity(user.city);
             setPhone(user.phone);
-            setSkills(user.skills);
+            setSelected(user.selected);
             setAvatar(user.avatar);
           }
         });
@@ -71,7 +91,7 @@ const AddEditPage = () => {
     address,
     city,
     phone,
-    skills,
+    selected,
     avatar,
   };
 
@@ -119,7 +139,7 @@ const AddEditPage = () => {
             setAddress(user.address);
             setCity(user.city);
             setPhone(user.phone);
-            setSkills(user.skills);
+            setSelected(user.selected);
             setAvatar(user.avatar);
           }
         });
@@ -220,16 +240,13 @@ const AddEditPage = () => {
               />
             </div>
 
-            <div className="input-group-sm mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Skills"
-                name="skills"
-                defaultValue={skills}
-                onChange={(e) => setSkills(e.target.value)}
-              />
-            </div>
+            <MultiSelect
+              className="mb-3"
+              options={options}
+              value={selected}
+              onChange={setSelected}
+              labelledBy="Select"
+            />
 
             <div className="input-group-sm">
               <div className="custom-file">
