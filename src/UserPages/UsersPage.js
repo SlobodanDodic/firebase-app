@@ -16,7 +16,7 @@ const UsersPage = () => {
             ...snapshot.val(),
           });
         } else {
-          snapshot({}); // something`s not right
+          window.alert("The list is empty!");
         }
       });
   }, []);
